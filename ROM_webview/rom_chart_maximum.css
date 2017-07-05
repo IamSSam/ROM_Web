@@ -1,0 +1,73 @@
+html, body {
+    height: 100%;
+    margin: auto;
+}
+
+table tbody tr, table thead th:first-child {
+  cursor: pointer;
+}
+
+#rom-data-chart{
+  height: 600px;
+}
+
+#rom-data-chart-panel{
+  height: 95%;
+}
+
+#rom-data-table{
+  height: 600px;
+}
+
+#rom-data-table-panel{
+  height: 95%;
+}
+
+#rom-table-thead-number{
+  width: 60px;
+}
+
+#rom-table-thead-angle{
+  width: 150px;
+}
+
+#rom-table-thead-date{
+  width: 130px;
+}
+
+#rom-table-thead-variation{
+  width: 100px;
+}
+
+#patient_name, #patient_number, #patient_gender, #patient_birth{
+  font-size: 13.5px;
+  font-style: normal;
+  font-family: sans-serif;
+  color: black;
+}
+
+#print_container{
+  text-align: end;
+  text-align: -webkit-right;
+}
+
+#image_container{
+  text-align: end;
+  text-align: -webkit-right;
+}
+
+#select_container{
+  font-size: 14px;
+  font-style: normal;
+  font-family: sans-serif;
+}
+
+.profile_view {
+  width: 100%;
+}
+
+.dropdown{
+  margin-right: 5px;
+  text-align: center;
+  text-align: -webkit-right;
+}
