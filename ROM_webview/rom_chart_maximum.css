@@ -24,11 +24,11 @@ table tbody tr, table thead th:first-child {
 }
 
 #rom-table-thead-number{
-  width: 60px;
+  width: 30px;
 }
 
 #rom-table-thead-angle{
-  width: 150px;
+  width: 130px;
 }
 
 #rom-table-thead-date{
@@ -36,7 +36,7 @@ table tbody tr, table thead th:first-child {
 }
 
 #rom-table-thead-variation{
-  width: 100px;
+  width: 50px;
 }
 
 #patient_name, #patient_number, #patient_gender, #patient_birth{

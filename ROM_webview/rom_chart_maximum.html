@@ -34,7 +34,7 @@
   <body class="html-body">
     <div class="container-fluid" style='page-break-before:always'>
       <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="col-md-12 col-sm-12 col-xs-12" style="margin-top: 15px;">
             <div class="x_panel">
               <div class="x_title">
                 <div class="row">
@@ -58,7 +58,7 @@
                       <div class="ol-md-12 col-sm-12 col-xs-12">
 
                         <div class="row">
-                          <div class="col-md-8 col-sm-8 col-xs-8">
+                          <div class="col-md-6 col-sm-6 col-xs-6">
                             <div class="row">
                               <div class="col-md-6 col-sm-6 col-xs-6" style="border-right: 2px solid #73879c">
                                 <p><strong>이름 : </strong><strong id="patient_name"> -- </strong></p>
@@ -71,8 +71,8 @@
                             </div>
                           </div>
 
-                          <div class="col-md-4 col-sm-4 col-xs-4" id="select_container">
-                            <b><p>환자와 측정 부위를 선택해주세요.</p></b>
+                          <div class="col-md-6 col-sm-6 col-xs-6" id="select_container">
+                            <p style="font-size: 12px"><strong>환자와 측정 부위를 선택해주세요.</strong></p>
                             <ul class="nav nav-pills" role="tablist">
                               <li role="presentation" class="dropdown">
                                 <select id="drop1" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="true" onchange="getPatientName()">
@@ -102,7 +102,7 @@
       <div class="container-fluid" >
         <div class="row">
           <!-- chart.js -->
-          <div class="col-md-6 col-sm-6 col-xs-12" id="rom-data-chart">
+          <div class="col-md-6 col-sm-12 col-xs-12" id="rom-data-chart">
             <div class="x_panel col-xs-12" id="rom-data-chart-panel">
               <div class="x_title">
                 <h2> 그래프 </h2>
@@ -116,16 +116,16 @@
           </div>
 
           <!--Data Table-->
-          <div class="col-md-6 col-sm-6 col-xs-12" id="rom-data-table">
+          <div class="col-md-6 col-sm-12 col-xs-12" id="rom-data-table">
             <div class="x_panel" id="rom-data-table-panel">
               <div class="x_title">
                 <div class="row">
-                  <div class="col-md-10 col-sm-10 col-xs-10">
+                  <div class="col-md-8 col-sm-8 col-xs-8">
                     <h2>데이터 테이블 </h2>
                   </div>
-                  <div class="col-md-2 col-sm-2 col-xs-2 hidden-print" id="image_container">
+                  <div class="col-md-4 col-sm-4 col-xs-4 hidden-print" id="image_container">
                     <div class="bs-example-popovers">
-                      <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="Download Images!">사진 받기</button>
+                      <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="Download Images!">Download Images</button>
                     </div>
                   </div>
                 </div>
@@ -136,7 +136,7 @@
                 <table id="rom-datatable" class="table table-striped table-bordered">
                   <thead>
                     <tr>
-                      <th id="rom-table-thead-number">Number</th>
+                      <th id="rom-table-thead-number">Num</th>
                       <th id="rom-table-thead-angle">Max Angle</th>
                       <th id="rom-table-thead-variation">Variation</th>
                       <th id="rom-table-thead-date">Date</th>
