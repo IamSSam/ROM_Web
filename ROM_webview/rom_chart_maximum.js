@@ -1,6 +1,7 @@
 var table;
 
 window.onload = function(){
+
   $.ajax({
     url: 'http://igrus.mireene.com/rom_web/checkdatepatientlist.php',
     type: 'GET',
@@ -254,6 +255,8 @@ function getPatientName(){
 }
 
 function getPatientInfo(post_data){
+  
+
   post_data = "name=" + post_data;
   $.ajax({
     url: 'http://igrus.mireene.com/rom_web/patientlist2.php',
@@ -282,6 +285,8 @@ function getPatientInfo(post_data){
 }
 
 function setJointDirection(){
+
+  $("#image_container").empty();
   table.clear().draw();
   for(var i = 0; i< data_count; i++){
     removeData(chart);
@@ -412,16 +417,28 @@ function setJointDirection(){
         ] ).draw( false );
 
         // images
-        
         var image_container = document.getElementById('image_container');
+        var div_container = document.createElement("div");
         var img_tag = document.createElement("img");
+        var div_tag = document.createElement("div");
+        var div_tag_sub = document.createElement("div");
+
+        img_tag.setAttribute("class", "img-responsive col-md-12 col-sm-12 col-xs-12");
         img_tag.setAttribute("width", "100%");
-        img_tag.setAttribute("display", "block");
         img_tag.setAttribute("src", "../image/" + data[i].image);
         img_tag.setAttribute("alt", "There is No image");
         img_tag.setAttribute("id", "img_" + (i+1));
 
-        image_container.appendChild(img_tag);
+        div_container.setAttribute("class", "div_container col-md-3 col-sm-4 col-xs-3");
+        
+        div_tag.setAttribute("class", "overlay");
+        div_tag_sub.setAttribute("class", "text");
+        div_tag_sub.innerHTML = data[i].maxangle + " °";
+
+        image_container.appendChild(div_container);
+        div_container.appendChild(img_tag);
+        div_container.appendChild(div_tag);
+        div_tag.appendChild(div_tag_sub);
         
       }
 
