@@ -412,7 +412,7 @@ function setJointDirection(){
         ] ).draw( false );
 
         // images
-        /*
+        
         var image_container = document.getElementById('image_container');
         var img_tag = document.createElement("img");
         img_tag.setAttribute("width", "100%");
@@ -422,7 +422,7 @@ function setJointDirection(){
         img_tag.setAttribute("id", "img_" + (i+1));
 
         image_container.appendChild(img_tag);
-        */
+        
       }
 
       data_count = data.length;

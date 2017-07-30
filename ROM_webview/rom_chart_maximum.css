@@ -24,11 +24,11 @@ table tbody tr, table thead th:first-child {
 }
 
 #rom-table-thead-number{
-  width: 30px;
+  width: 20px;
 }
 
 #rom-table-thead-angle{
-  width: 130px;
+  width: 80px;
 }
 
 #rom-table-thead-date{
@@ -51,7 +51,7 @@ table tbody tr, table thead th:first-child {
   text-align: -webkit-right;
 }
 
-#image_container{
+#download_container{
   text-align: end;
   text-align: -webkit-right;
 }
