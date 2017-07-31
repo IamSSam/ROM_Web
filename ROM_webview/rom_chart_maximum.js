@@ -3,7 +3,7 @@ var table;
 window.onload = function(){
 
   $.ajax({
-    url: 'http://igrus.mireene.com/rom_web/checkdatepatientlist.php',
+    url: 'http://127.0.0.1/rom_web/checkdatepatientlist.php',
     type: 'GET',
     dataType: 'json',
     success: function(data){
@@ -144,7 +144,7 @@ function getPatientName(){
     alert("환자를 선택해주세요.");
   }else{
     $.ajax({
-      url: 'http://igrus.mireene.com/rom_web/checkdatejointdirectionlist.php',
+      url: 'http://127.0.0.1/rom_web/checkdatejointdirectionlist.php',
       type: 'POST',
       data: post_data,
       dataType: 'json',
@@ -227,17 +227,9 @@ function getPatientName(){
               jointdirection = 'Right neck-abduction';
               break;
             case "201":
-              jointdirection = 'Left shoulder-posture';
+              jointdirection = 'Posture';
               break;
-            case "202":
-              jointdirection = 'Right shoulder-posture';
-              break;
-            case "211":
-              jointdirection = 'Left hip-posture';
-              break;
-            case "212":
-              jointdirection = 'Right hip-posture';
-              break;
+
             default:
           }
 
@@ -256,10 +248,9 @@ function getPatientName(){
 
 function getPatientInfo(post_data){
   
-
   post_data = "name=" + post_data;
   $.ajax({
-    url: 'http://igrus.mireene.com/rom_web/patientlist2.php',
+    url: 'http://127.0.0.1/rom_web/patientlist2.php',
     type: 'POST',
     data: post_data,
     dataType: 'json',
@@ -306,141 +297,205 @@ function setJointDirection(){
   var data2 = [];
 
   $.ajax({
-    url: 'http://igrus.mireene.com/rom_web/checkdatelist.php',
+    url: 'http://127.0.0.1/rom_web/checkdatelist.php',
     type: 'POST',
     dataType: 'json',
     data: post_data,
     success: function(data){
-      console.log(data);
-      for(var i = 0; i < data.length; i++){
+      //console.log(data);
+      for(var i = 0; i < data.length; i ++){
 
-        var jointdirection = selected_jointdirection;
+      var jointdirection = selected_jointdirection;
 
-        switch (jointdirection) {
-          case "11":
-            data2.push("170");
-            break;
-          case "12":
-            data2.push("170");
-            break;
-          case "21":
-            data2.push("105");
-            break;
-          case "22":
-            data2.push("105");
-            break;
-          case "31":
-            jointdirection = 'Left shoulder-rotation';
-            break;
-          case "32":
-            jointdirection = 'Right shoulder-rotation';
-            break;
-          case "41":
-            jointdirection = 'Left elbow-flexion';
-            break;
-          case "42":
-            jointdirection = 'Right elbow-flexion';
-            break;
-          case "51":
-            jointdirection = 'Left elbow-pronation';
-            break;
-          case "52":
-            jointdirection = 'Right elbow-pronation';
-            break;
-          case "61":
-            jointdirection = 'Left knee-flexion';
-            break;
-          case "62":
-            jointdirection = 'Right knee-flexion';
-            break;
-          case "71":
-            jointdirection = 'Left hip-flexion';
-            break;
-          case "72":
-            jointdirection = 'Right hip-flexion';
-            break;
-          case "81":
-            jointdirection = 'Left hip-rotation';
-            break;
-          case "82":
-            jointdirection = 'Right hip-rotation';
-            break;
-          case "91":
-            jointdirection = 'Left neck-rotation';
-            break;
-          case "92":
-            jointdirection = 'Right neck-rotation';
-            break;
-          case "101":
-            jointdirection = 'Left neck-flexion';
-            break;
-          case "102":
-            jointdirection = 'Right neck-flexion';
-            break;
-          case "111":
-            jointdirection = 'Left neck-abduction';
-            break;
-          case "112":
-            jointdirection = 'Right neck-abduction';
-            break;
-          case "201":
-            jointdirection = 'Left shoulder-posture';
-            break;
-          case "202":
-            jointdirection = 'Right shoulder-posture';
-            break;
-          case "211":
-            jointdirection = 'Left hip-posture';
-            break;
-          case "212":
-            jointdirection = 'Right hip-posture';
-            break;
-          default:
-        }
-
-        addData(chart, data[i].datetime.substring(0,10), data[i].maxangle, data2[i]);
-
-        var rate = 0;
-        if(i == 0){
-          rate = 0;
-        }
-
-        if(i >= 1){
-          rate = Math.floor(data[i].maxangle - data[i-1].maxangle);
-        }
-
-        table.row.add( [
-            info + (i+1),
-            info + data[i].maxangle +" °",
-            info + rate + " °",
-            info + data[i].datetime,
-        ] ).draw( false );
-
-        // images
-        var image_container = document.getElementById('image_container');
-        var div_container = document.createElement("div");
-        var img_tag = document.createElement("img");
-        var div_tag = document.createElement("div");
-        var div_tag_sub = document.createElement("div");
-
-        img_tag.setAttribute("class", "img-responsive col-md-12 col-sm-12 col-xs-12");
-        img_tag.setAttribute("width", "100%");
-        img_tag.setAttribute("src", "../image/" + data[i].image);
-        img_tag.setAttribute("alt", "There is No image");
-        img_tag.setAttribute("id", "img_" + (i+1));
-
-        div_container.setAttribute("class", "div_container col-md-3 col-sm-4 col-xs-3");
-        
-        div_tag.setAttribute("class", "overlay");
-        div_tag_sub.setAttribute("class", "text");
-        div_tag_sub.innerHTML = data[i].maxangle + " °";
-
-        image_container.appendChild(div_container);
-        div_container.appendChild(img_tag);
-        div_container.appendChild(div_tag);
-        div_tag.appendChild(div_tag_sub);
-        
+      switch (jointdirection) {
+        case "11":
+          data2.push("170");
+          break;
+        case "12":
+          data2.push("170");
+          break;
+        case "21":
+          data2.push("105");
+          break;
+        case "22":
+          data2.push("105");
+          break;
+        case "31":
+          jointdirection = 'Left shoulder-rotation';
+          break;
+        case "32":
+          jointdirection = 'Right shoulder-rotation';
+          break;
+        case "41":
+          jointdirection = 'Left elbow-flexion';
+          break;
+        case "42":
+          jointdirection = 'Right elbow-flexion';
+          break;
+        case "51":
+          jointdirection = 'Left elbow-pronation';
+          break;
+        case "52":
+          jointdirection = 'Right elbow-pronation';
+          break;
+        case "61":
+          jointdirection = 'Left knee-flexion';
+          break;
+        case "62":
+          jointdirection = 'Right knee-flexion';
+          break;
+        case "71":
+          jointdirection = 'Left hip-flexion';
+          break;
+        case "72":
+          jointdirection = 'Right hip-flexion';
+          break;
+        case "81":
+          jointdirection = 'Left hip-rotation';
+          break;
+        case "82":
+          jointdirection = 'Right hip-rotation';
+          break;
+        case "91":
+          jointdirection = 'Left neck-rotation';
+          break;
+        case "92":
+          jointdirection = 'Right neck-rotation';
+          break;
+        case "101":
+          jointdirection = 'Left neck-flexion';
+          break;
+        case "102":
+          jointdirection = 'Right neck-flexion';
+          break;
+        case "111":
+          jointdirection = 'Left neck-abduction';
+          break;
+        case "112":
+          jointdirection = 'Right neck-abduction';
+          break;
+        case "201":
+          jointdirection = 'Posture';
+          break;
+        default:
       }
+
+      var rate = 0;
+      if(i == 0){
+        rate = 0;
+      }
+
+      if(i >= 1){
+        rate = Math.floor(data[i].maxangle - data[i-1].maxangle);
+      }
+
+      table.row.add( [
+          info + (i+1),
+          info + data[i].maxangle +" °",
+          info + rate + " °",
+          info + data[i].datetime,
+      ] ).draw( false );
+
+      // images
+      var image_container = document.getElementById('image_container');
+      var div_container = document.createElement("div");
+      var img_tag = document.createElement("img");
+      var div_tag = document.createElement("div");
+      var div_tag_sub = document.createElement("div");
+
+      img_tag.setAttribute("class", "img-responsive col-md-12 col-sm-12 col-xs-12");
+      img_tag.setAttribute("width", "100%");
+      img_tag.setAttribute("src", "../image/" + data[i].image);
+      img_tag.setAttribute("alt", "There is No image");
+      img_tag.setAttribute("id", "img_" + (i+1));
+
+      div_container.setAttribute("class", "div_container col-md-3 col-sm-4 col-xs-3");
+      
+      div_tag.setAttribute("class", "overlay");
+      div_tag_sub.setAttribute("class", "text");
+      div_tag_sub.innerHTML = data[i].maxangle + " °";
+
+      image_container.appendChild(div_container);
+      div_container.appendChild(img_tag);
+      div_container.appendChild(div_tag);
+      div_tag.appendChild(div_tag_sub);
+      
+    }
+
+    var j = 0;
+    var cnt = 0;
+    var flag = 0;
+
+    for(; j < data.length; j++){
+      if(j % 10 == 0 && j != 0){
+        break;
+      }
+      addData(chart, data[j].datetime.substring(0,10), data[j].maxangle, data2[j]);
+    }
+    cnt++;
+
+    $(".chart_previous").click(function(){
+      if(j == 10 || data.length < 10){
+        //prohibit remove data
+
+      }else{
+        if(flag == 1){
+          cnt -= 2;
+        }else{
+          cnt -= 1;
+        }
+
+        flag = 0;
+
+        for(var i = 0; i < j; i++){
+          removeData(chart);
+        }
+
+        j -= 10;
+
+        if(j % 10 == 0){
+          j -= 10;
+        }else if(j % 10 != 0){
+          j -= j % 10;
+        }
+        
+        for(; j < data.length; j++){
+          if(j % 10 == 0 && j != 10*cnt){
+            break;
+          }
+          addData(chart, data[j].datetime.substring(0,10), data[j].maxangle, data2[j]);
+        }
+
+        cnt++;
+      }
+      
+    });
+    
+    $(".chart_next").click(function(){
+
+      if(j == data.length){
+        // 금지
+        document.getElementById("chart_next").disabled = true;
+      }else{
+        
+        flag = 1;      
+
+        for(var i = 0; i < j; i++){
+          removeData(chart);
+        }
+
+        for(; j < data.length; j++){
+          if(j % 10 == 0 && j != 10*cnt){
+            break;
+          }
+          addData(chart, data[j].datetime.substring(0,10), data[j].maxangle, data2[j]);
+        }
+
+        cnt++;
+      }
+      
+    });
+
 
       data_count = data.length;
 

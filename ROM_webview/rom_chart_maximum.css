@@ -106,3 +106,24 @@ img {
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
 }
+
+a {
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 16px;
+}
+
+.chart_previous {
+    background-color: #ddd;
+    color: #777;
+    border-radius: 4px;
+    cursor: not-allowed;
+}
+
+
+.chart_next {
+    background-color: #ddd;
+    color: #777;
+    border-radius: 4px;
+    cursor: not-allowed;
+}
