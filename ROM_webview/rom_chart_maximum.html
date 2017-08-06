@@ -49,34 +49,34 @@
                 <div class="row">
                   <div class="col-md-12 col-sm-12 col-xs-12 profile_details">
                     <h4 class="brief">환자 정보</h4>
-                    <div class="well profile_view">
+                    <div class="well profile_view" style="padding-bottom: 10px">
                       <div class="col-md-12 col-sm-12 col-xs-12">
 
                         <div class="row">
                           <div class="col-md-6 col-sm-6 col-xs-6">
                             <div class="row">
                               <div class="col-md-6 col-sm-6 col-xs-6" style="border-right: 6px solid #73879c">
-                                <p><strong>이름 : </strong><strong id="patient_name"> -- </strong></p>
-                                <p><strong>병록번호 : </strong><strong  id="patient_number">No. </strong></p>
+                                <p style="font-size: 16px"><strong>이름 : </strong><strong id="patient_name">--</strong></p>
+                                <p style="font-size: 16px"><strong>병록번호 : </strong><strong  id="patient_number">No.</strong></p>
                               </div>
                               <div class="col-md-6 col-sm-6 col-xs-6" style="border-right: 6px solid #73879c">
-                                <p><strong>성별 : </strong> <strong id="patient_gender"> -- </strong> </p>
-                                <p><strong>생년월일 : </strong> <strong id="patient_birth"> -- </strong>  </p>
+                                <p style="font-size: 16px"><strong>성별 : </strong> <strong id="patient_gender"> -- </strong> </p>
+                                <p style="font-size: 16px"><strong>생년월일 : </strong> <strong id="patient_birth"> -- </strong>  </p>
                               </div>
                             </div>
                           </div>
 
                           <div class="col-md-6 col-sm-6 col-xs-6" id="select_container">
-                            <p style="font-size: 12px"><strong>환자와 측정 부위를 선택해주세요.</strong></p>
+                            <p style="font-size: 16px"><strong>환자와 측정 부위를 선택해주세요.</strong></p>
                             <ul class="nav nav-pills" role="tablist">
                               <li role="presentation" class="dropdown">
-                                <select id="drop1" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="true" onchange="getPatientName()">
+                                <select id="drop1" href="#" class="form-control dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="true" onchange="getPatientName()">
                                   <option id="patientid" value='' selected> -- Patient -- </option>
                                 </select>
                               </li>
 
                               <li role="presentation" class="dropdown">
-                                <select id="drop2" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="true" onchange="setJointDirection()">
+                                <select id="drop2" href="#" class="form-control dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="true" onchange="setJointDirection()">
                                   <option id="jointdirection" value='' selected> -- Joint Direction -- </option>
                                 </select>
                               </li>
@@ -193,7 +193,6 @@
                 <h2> 측정 영상 </h2>
                 <div class="clearfix"></div>
               </div>
-              
               <div class="container">
                   <div class="row">
                   	<div class="col-md-7">
@@ -203,13 +202,12 @@
                         </video>
                       </div>
                   	</div>
-
                     <div class="col-md-5">
                       <div>
                         <p style="font-size: 15px;vertical-align: middle;"><strong>원하는 영상을 선택해주세요.</strong></p>
                         <ul class="nav nav-pills" role="tablist">
                           <li role="presentation" class="dropdown">
-                            <select id="drop3" href="#" class="selectpicker dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="true" onchange="selectMovie()">
+                            <select id="drop3" href="#" class="form-control dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="true" onchange="selectMovie()">
                               <option id="movie" value='' selected> -- Measurement Movie -- </option>
                             </select>
                           </li>
