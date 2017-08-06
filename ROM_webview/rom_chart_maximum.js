@@ -3,7 +3,8 @@ var table;
 window.onload = function(){
 
   $.ajax({
-    url: 'http://127.0.0.1/rom_web/checkdatepatientlist.php',
+    //url: 'http://127.0.0.1/php/rom_web_php/get_patient_name.php',
+    url: '../php/rom_web_php/get_patient_name.php',
     type: 'GET',
     dataType: 'json',
     success: function(data){
@@ -144,7 +145,8 @@ function getPatientName(){
     alert("환자를 선택해주세요.");
   }else{
     $.ajax({
-      url: 'http://127.0.0.1/rom_web/checkdatejointdirectionlist.php',
+      //url: 'http://127.0.0.1/php/rom_web_php/get_jointdirection_list.php',
+      url: '../php/rom_web_php/get_jointdirection_list.php',
       type: 'POST',
       data: post_data,
       dataType: 'json',
@@ -250,7 +252,8 @@ function getPatientInfo(post_data){
   
   post_data = "name=" + post_data;
   $.ajax({
-    url: 'http://127.0.0.1/rom_web/patientlist2.php',
+    //url: 'http://127.0.0.1/php/rom_web_php/get_patient_info.php',
+    url: '../php/rom_web_php/get_patient_info.php',
     type: 'POST',
     data: post_data,
     dataType: 'json',
@@ -297,7 +300,8 @@ function setJointDirection(){
   var data2 = [];
 
   $.ajax({
-    url: 'http://127.0.0.1/rom_web/checkdatelist.php',
+    //url: 'http://127.0.0.1/php/rom_web_php/get_result_table.php',
+    url: '../php/rom_web_php/get_result_table.php',
     type: 'POST',
     dataType: 'json',
     data: post_data,
@@ -425,6 +429,14 @@ function setJointDirection(){
     var j = 0;
     var cnt = 0;
     var flag = 0;
+    var index = 0;
+    var size;
+
+    if((data.length % 10) == 0){
+      size = data.length / 10;
+    }else{
+      size = (data.length / 10) + 1;
+    }
 
     for(; j < data.length; j++){
       if(j % 10 == 0 && j != 0){
@@ -467,6 +479,7 @@ function setJointDirection(){
         }
 
         cnt++;
+
       }
       
     });
@@ -475,10 +488,10 @@ function setJointDirection(){
 
       if(j == data.length){
         // 금지
-        document.getElementById("chart_next").disabled = true;
+        document.getElementById("chart_next").style.cursor = "not-allowed";
       }else{
         
-        flag = 1;      
+        flag = 1;
 
         for(var i = 0; i < j; i++){
           removeData(chart);
