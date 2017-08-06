@@ -50,16 +50,16 @@
                   <div class="col-md-12 col-sm-12 col-xs-12 profile_details">
                     <h4 class="brief">환자 정보</h4>
                     <div class="well profile_view">
-                      <div class="ol-md-12 col-sm-12 col-xs-12">
+                      <div class="col-md-12 col-sm-12 col-xs-12">
 
                         <div class="row">
                           <div class="col-md-6 col-sm-6 col-xs-6">
                             <div class="row">
-                              <div class="col-md-6 col-sm-6 col-xs-6" style="border-right: 2px solid #73879c">
+                              <div class="col-md-6 col-sm-6 col-xs-6" style="border-right: 6px solid #73879c">
                                 <p><strong>이름 : </strong><strong id="patient_name"> -- </strong></p>
                                 <p><strong>병록번호 : </strong><strong  id="patient_number">No. </strong></p>
                               </div>
-                              <div class="col-md-6 col-sm-6 col-xs-6" style="border-right: 2px solid #73879c">
+                              <div class="col-md-6 col-sm-6 col-xs-6" style="border-right: 6px solid #73879c">
                                 <p><strong>성별 : </strong> <strong id="patient_gender"> -- </strong> </p>
                                 <p><strong>생년월일 : </strong> <strong id="patient_birth"> -- </strong>  </p>
                               </div>
@@ -183,35 +183,46 @@
         </div>
       </div>
 
-      <div class="container-fluid" style='page-break-before:always'>
+      <br>
+
+      <div class="container-fluid hidden-print" style='page-break-before:always'>
         <div class="row">
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
-            <div class="x_title">
-                <h2>측정영상</h2>
+              <div class="x_title">
+                <h2> 측정 영상 </h2>
                 <div class="clearfix"></div>
+              </div>
+              
+              <div class="container">
+                  <div class="row">
+                  	<div class="col-md-7">
+        							<div>
+                        <video id="video_tag" width="100%" controls autoplay>
+                          <!--  -->
+                        </video>
+                      </div>
+                  	</div>
+
+                    <div class="col-md-5">
+                      <div style="vertical-align: middle;">
+                        <p style="font-size: 15px;vertical-align: middle;"><strong>원하는 영상을 선택해주세요.</strong></p>
+                        <ul class="nav nav-pills" role="tablist">
+                          <li role="presentation" class="dropdown">
+                            <select id="drop3" href="#" class="selectpicker dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="true" onchange="selectMovie()">
+                              <option id="movie" value='' selected> -- Measurement Movie -- </option>
+                            </select>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>                  	
+                  </div>
+              </div>
             </div>
-                <div class="container">
-	                <div class="row">
-	                	<div class="col-md-6">
-	                	<h2>16:9</h2>
-							<div class="embed-responsive embed-responsive-16by9">
-	    						<iframe class="embed-responsive-item" src="//www.youtube.com/embed/ePbKGoIGAXY"></iframe>
-							</div>
-	                	</div>
-	                	<div class="col-md-6">
-	                	<h2>4:3</h2>
-							<div class="embed-responsive embed-responsive-4by3">
-		    					<iframe class="embed-responsive-item" src="//www.youtube.com/embed/ePbKGoIGAXY"></iframe>
-							</div>
-	                	</div>
-	                </div>
-                </div>
+            <div class="x_content">
+              <div class="row col-md-12 col-sm-12 col-xs-12" id="image_container">
               </div>
-              <div class="x_content">
-                <div class="row col-md-12 col-sm-12 col-xs-12" id="image_container">
-                </div>
-              </div>
+            </div>
           </div>
         </div>
       </div>

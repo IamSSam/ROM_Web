@@ -1,7 +1,7 @@
 var table;
 
 window.onload = function(){
-
+  
   $.ajax({
     //url: 'http://127.0.0.1/php/rom_web_php/get_patient_name.php',
     url: '../php/rom_web_php/get_patient_name.php',
@@ -423,7 +423,6 @@ function setJointDirection(){
       div_container.appendChild(img_tag);
       div_container.appendChild(div_tag);
       div_tag.appendChild(div_tag_sub);
-      
     }
 
     var j = 0;
@@ -517,6 +516,54 @@ function setJointDirection(){
       console.log(request, status, error);
     },
   });
+
+  getMovie();
+}
+
+function getMovie(){
+
+  var select_name = document.getElementById('drop1');
+  var selected_name = select_name.options[select_name.selectedIndex].text;
+
+  var select_jointdirection = document.getElementById('drop2');
+  var selected_jointdirection = select_jointdirection.options[select_jointdirection.selectedIndex].value;
+
+  var post_data = "name=" + selected_name + "&jointdirection=" + selected_jointdirection;
+
+  $.ajax({
+    url: '../php/rom_web_php/get_movie_list.php',
+    type: 'POST',
+    data: post_data,
+    dataType: 'json',
+    success: function(data){
+      for(var i = 0; i < data.length; i++){
+        var movie_name = data[i].movie;
+        var movie_container = document.getElementById('drop3');
+        var new_movie = document.createElement("option");
+        new_movie.innerHTML = movie_name;
+        movie_container.appendChild(new_movie);
+      }
+    },
+
+    error: function(request, status, error){
+      console.log(request, status, error);
+    },
+  });
+
+}
+
+function selectMovie(){
+   var video_tag = document.getElementById('video_tag');
+   var source_tag = document.createElement('source');
+   var select_movie = document.getElementById('drop3');
+   var selected_movie = select_movie.options[select_movie.selectedIndex].value;
+
+   source_tag.setAttribute("src","../movie/movie.mp4");
+   //source_tag.setAttribute("src","../movie/" + selected_movie);
+   source_tag.setAttribute("type","video/mp4");
+   
+   video_tag.appendChild(source_tag);
+
 }
 
 function romPrint(){
