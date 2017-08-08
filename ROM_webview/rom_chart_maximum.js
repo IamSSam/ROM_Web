@@ -154,6 +154,7 @@ function getPatientName(){
         console.log("asdfasdfasdf:"+data);
         var jointdirection_container = document.getElementById('drop2');
         $("#drop2 option:gt(0)").remove();
+        $("#drop3 option:gt(0)").remove();
 
         for(var i = 0; i < data.length; i++){
           var jointdirection = data[i].jointdirection;
@@ -281,6 +282,9 @@ function getPatientInfo(post_data){
 function setJointDirection(){
 
   $("#image_container").empty();
+  $('#video_tag > source').attr("src", "");
+
+  $("#drop3 option:gt(0)").remove();
   table.clear().draw();
   for(var i = 0; i< data_count; i++){
     removeData(chart);
@@ -559,6 +563,7 @@ function selectMovie(){
    var selected_movie = select_movie.options[select_movie.selectedIndex].value;
 
    source_tag.setAttribute("src","../movie/movie.mp4");
+   source_tag.setAttribute("id", "video_source")
    //source_tag.setAttribute("src","../movie/" + selected_movie);
    source_tag.setAttribute("type","video/mp4");
    
