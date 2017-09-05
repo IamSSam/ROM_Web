@@ -2,28 +2,36 @@
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-   
+    <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keywords" content="Team Elysium Inc." />
-    <meta name="author" content="Team Elysium Inc." />
-    <meta name="description" content="Medical Software Company">
     <meta http-equiv="Expires" content="Mon, 06 Jan 1990 00:00:01 GMT">
     <meta http-equiv="Cache-Control" content="no-cache">
 
-    <title>Team Elysium Inc.</title>
+    <title>Team Elysium</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css" rel="stylesheet" />
     <link href="./vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="./vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="./vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="./vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+
     <!-- Datatables -->
     <link href="./vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
     <link href="./vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="./vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="./vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="./vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+
+    <!-- Title image -->
+
     <!-- Custom Theme Style -->
     <link href="./build/css/custom.min.css" rel="stylesheet">
-    <link href="./rom_chart_maximum.css" rel="stylesheet">
 
+    <link href="./rom_chart_maximum.css" rel="stylesheet">
   </head>
 
   <body class="html-body">
@@ -49,34 +57,34 @@
                 <div class="row">
                   <div class="col-md-12 col-sm-12 col-xs-12 profile_details">
                     <h4 class="brief">환자 정보</h4>
-                    <div class="well profile_view" style="padding-bottom: 10px">
-                      <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="well profile_view">
+                      <div class="ol-md-12 col-sm-12 col-xs-12">
 
                         <div class="row">
-                          <div class="col-md-6 col-sm-6 col-xs-5">
+                          <div class="col-md-6 col-sm-6 col-xs-6">
                             <div class="row">
-                              <div class="col-md-6 col-sm-6 col-xs-6" style="border-right: 6px solid #73879c">
-                                <p style="font-size: 16px"><strong>이름 : </strong><strong id="patient_name">--</strong></p>
-                                <p style="font-size: 16px"><strong>병록번호 : </strong><strong  id="patient_number">No.</strong></p>
+                              <div class="col-md-6 col-sm-6 col-xs-6" style="border-right: 2px solid #73879c">
+                                <p><strong>이름 : </strong><strong id="patient_name"> -- </strong></p>
+                                <p><strong>병록번호 : </strong><strong  id="patient_number">No. </strong></p>
                               </div>
-                              <div class="col-md-6 col-sm-6 col-xs-6" style="border-right: 6px solid #73879c">
-                                <p style="font-size: 16px"><strong>성별 : </strong> <strong id="patient_gender"> -- </strong> </p>
-                                <p style="font-size: 16px"><strong>생년월일 : </strong> <strong id="patient_birth"> -- </strong>  </p>
+                              <div class="col-md-6 col-sm-6 col-xs-6" style="border-right: 2px solid #73879c">
+                                <p><strong>성별 : </strong> <strong id="patient_gender"> -- </strong> </p>
+                                <p><strong>생년월일 : </strong> <strong id="patient_birth"> -- </strong>  </p>
                               </div>
                             </div>
                           </div>
 
-                          <div class="col-md-6 col-sm-6 col-xs-7" id="select_container">
-                            <p style="font-size: 16px"><strong>환자와 측정 부위를 선택해주세요.</strong></p>
+                          <div class="col-md-6 col-sm-6 col-xs-6" id="select_container">
+                            <p style="font-size: 12px"><strong>환자와 측정 부위를 선택해주세요.</strong></p>
                             <ul class="nav nav-pills" role="tablist">
-                              <li role="presentation" class="dropdown">
-                                <select id="drop1" href="#" class="form-control dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="true" onchange="getPatientName()">
+                              <li role="presentation" class="dropdown" id="drop1-wrapper">
+                                <select id="drop1" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="true" onchange="getPatientName()">
                                   <option id="patientid" value='' selected> -- Patient -- </option>
                                 </select>
                               </li>
 
-                              <li role="presentation" class="dropdown">
-                                <select id="drop2" href="#" class="form-control dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="true" onchange="setJointDirection()">
+                              <li role="presentation" class="dropdown" id="drop2-wrapper">
+                                <select id="drop2" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="true" onchange="setJointDirection()">
                                   <option id="jointdirection" value='' selected> -- Joint Direction -- </option>
                                 </select>
                               </li>
@@ -100,21 +108,13 @@
           <div class="col-md-6 col-sm-12 col-xs-12" id="rom-data-chart">
             <div class="x_panel col-xs-12" id="rom-data-chart-panel">
               <div class="x_title">
-                <h4> 측정 결과 그래프 </h4>
+                <h2> 측정 결과 그래프 </h2>
 
                 <div class="clearfix"></div>
               </div>
-              <div class="x_content col-xs-12" id="demo">
+              <div class="x_content col-xs-12">
                 <canvas id="myChart"></canvas>
-                
-                <div class="row text-right" style="margin-top: 20px">
-                  <a class="chart_previous" id="chart_previous">Previous</a>
-                  <a class="chart_next" id="chart_next">Next</a>
-                </div>
-                
               </div>
-
-              
             </div>
           </div>
 
@@ -124,7 +124,7 @@
               <div class="x_title">
                 <div class="row">
                   <div class="col-md-8 col-sm-8 col-xs-8">
-                    <h4> 측정 결과 테이블 </h4>
+                    <h2> 측정 결과 테이블 </h2>
                   </div>
                   <div class="col-md-4 col-sm-4 col-xs-4 hidden-print" id="download_container">
                     <div class="bs-example-popovers">
@@ -168,7 +168,7 @@
             <div class="x_panel">
 
               <div class="x_title">
-                <h4> 측정 이미지 </h4>
+                <h2> 측정 이미지 </h2>
 
                 <div class="clearfix"></div>
               </div>
@@ -183,52 +183,12 @@
         </div>
       </div>
 
-      <br>
-
-      <div class="container-fluid hidden-print" style='page-break-before:always'>
-        <div class="row">
-          <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="x_panel">
-              <div class="x_title">
-                <h4> 측정 영상 </h4>
-                <div class="clearfix"></div>
-              </div>
-              <div class="container">
-                  <div class="row">
-                  	<div class="col-md-7 col-sm-7 col-xs-10">
-        							<div>
-                        <video id="video_tag" width="100%" controls autoplay>
-                          <!--  -->
-                        </video>
-                      </div>
-                  	</div>
-                    <div class="col-md-5 col-sm-5 col-xs-2">
-                      <p style="font-size: 15px;vertical-align: middle;"><strong>원하는 영상을 선택해주세요.</strong></p>
-                      <ul class="nav nav-pills" role="tablist">
-                        <li role="presentation" class="dropdown">
-                          <select id="drop3" href="#" class="form-control dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="true" onchange="selectMovie()">
-                            <option id="movie" value='' selected> -- Measurement Movie -- </option>
-                          </select>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-              </div>
-            </div>
-            <div class="x_content">
-              <div class="row col-md-12 col-sm-12 col-xs-12" id="image_container">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <!-- footer content -->
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="pull-right" style="color:white">
-              COPYRIGHT ©<a href="http://www.teamelysium.kr"><b>Team Elysium Inc.</b></a>ALL RIGHTS RESERVED
+              COPYRIGHT © <a href="http://www.teamelysium.kr"><b>Team Elysium Inc.</b></a> ALL RIGHTS RESERVED
             </div>
             <div class="clearfix"></div>
           </div>
@@ -237,9 +197,17 @@
       <!-- /footer content -->
 
       <!-- jQuery -->
+
       <script src="./vendors/jquery/dist/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/js/select2.min.js"></script>
       <!-- Bootstrap -->
       <script src="./vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+      <!-- FastClick -->
+      <script src="./vendors/fastclick/lib/fastclick.js"></script>
+      <!-- NProgress -->
+      <script src="./vendors/nprogress/nprogress.js"></script>
+      <!-- iCheck -->
+      <script src="./vendors/iCheck/icheck.min.js"></script>
       <!-- Chart.js -->
       <script src="./vendors/Chart.js/dist/Chart.min.js"></script>
       <script src="./rom_chart_maximum.js"></script>
@@ -248,9 +216,18 @@
       <script src="./vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
       <script src="./vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
       <script src="./vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+      <script src="./vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
       <script src="./vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+      <script src="./vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+      <script src="./vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+      <script src="./vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
       <script src="./vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
       <script src="./vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+      <script src="./vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+      <script src="./vendors/jszip/dist/jszip.min.js"></script>
+      <script src="./vendors/pdfmake/build/pdfmake.min.js"></script>
+      <script src="./vendors/pdfmake/build/vfs_fonts.js"></script>
+
       <!-- Custom Theme Scripts -->
       <script src="./build/js/custom.min.js"></script>
 

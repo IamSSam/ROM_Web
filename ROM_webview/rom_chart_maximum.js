@@ -1,7 +1,8 @@
 var table;
 
 window.onload = function(){
-  
+
+  var patient_list = [];
   $.ajax({
     //url: 'http://127.0.0.1/php/rom_web_php/get_patient_name.php',
     url: '../php/rom_web_php/get_patient_name.php',
@@ -9,14 +10,18 @@ window.onload = function(){
     dataType: 'json',
     success: function(data){
       console.log(data);
-
       for(var i = 0; i < data.length; i++){
         var patient_name = data[i].name;
-        var patient_id_container = document.getElementById('drop1');
-        var new_patient_id = document.createElement("option");
-        new_patient_id.innerHTML = patient_name;
-        patient_id_container.appendChild(new_patient_id);
+        patient_list.push(patient_name);
       }
+
+      $("#drop1").select2({
+        data: patient_list
+      });
+      $('#drop1-wrapper > span').css("width","111px");
+      $('#drop1-wrapper > span').css("text-align","center");
+      $('#drop2-wrapper > select').css("height","38px");
+
     },
     error: function(request, status, error){
       console.log(request, status, error);
@@ -43,7 +48,7 @@ window.onload = function(){
   //table.clear().draw();
   getPatientName();
 
-}
+};
 
 
 var data_count = 0;
@@ -250,7 +255,7 @@ function getPatientName(){
 }
 
 function getPatientInfo(post_data){
-  
+
   post_data = "name=" + post_data;
   $.ajax({
     //url: 'http://127.0.0.1/php/rom_web_php/get_patient_info.php',
@@ -389,17 +394,29 @@ function setJointDirection(){
       }
 
       var rate = 0;
+      var angle = 0;
+
       if(i == 0){
         rate = 0;
       }
 
-      if(i >= 1){
-        rate = Math.floor(data[i].maxangle - data[i-1].maxangle);
+      if(jointdirection === "Posture"){
+        document.getElementById('rom-table-thead-angle').innerHTML = "SS Angle, SH Angle";
+        angle = data[i].sh_angle + " °, " + data[i].hh_angle + " °";
+        if(i >= 1){
+          rate = Math.floor(data[i].sh_angle - data[i-1].sh_angle) + " °, " + Math.floor(data[i].hh_angle - data[i-1].hh_angle);
+        }
+      }else{
+        document.getElementById('rom-table-thead-angle').innerHTML = "Max Angle";
+        angle = data[i].maxangle+ " °";
+        if(i >= 1){
+          rate = Math.floor(data[i].maxangle - data[i-1].maxangle);
+        }
       }
 
       table.row.add( [
           info + (i+1),
-          info + data[i].maxangle +" °",
+          info + angle,
           info + rate + " °",
           info + data[i].datetime,
       ] ).draw( false );
@@ -418,7 +435,7 @@ function setJointDirection(){
       img_tag.setAttribute("id", "img_" + (i+1));
 
       div_container.setAttribute("class", "div_container col-md-3 col-sm-4 col-xs-3");
-      
+
       div_tag.setAttribute("class", "overlay");
       div_tag_sub.setAttribute("class", "text");
       div_tag_sub.innerHTML = data[i].maxangle + " °";
@@ -445,7 +462,13 @@ function setJointDirection(){
       if(j % 10 == 0 && j != 0){
         break;
       }
-      addData(chart, data[j].datetime.substring(0,10), data[j].maxangle, data2[j]);
+
+      if(jointdirection === "Posture"){
+        //"jointdirectionjointdirection"
+        addData(chart, data[j].datetime.substring(0,10), data[j].sh_angle, data[j].hh_angle);
+      }else{
+        addData(chart, data[j].datetime.substring(0,10), data[j].maxangle, data2[j]);
+      }
     }
     cnt++;
 
@@ -473,27 +496,32 @@ function setJointDirection(){
         }else if(j % 10 != 0){
           j -= j % 10;
         }
-        
+
         for(; j < data.length; j++){
           if(j % 10 == 0 && j != 10*cnt){
             break;
           }
-          addData(chart, data[j].datetime.substring(0,10), data[j].maxangle, data2[j]);
+          if(jointdirection === "Posture"){
+            //"jointdirectionjointdirection"
+            addData(chart, data[j].datetime.substring(0,10), data[j].sh_angle, data[j].hh_angle);
+          }else{
+            addData(chart, data[j].datetime.substring(0,10), data[j].maxangle, data2[j]);
+          }
         }
 
         cnt++;
 
       }
-      
+
     });
-    
+
     $(".chart_next").click(function(){
 
       if(j == data.length){
         // 금지
         document.getElementById("chart_next").style.cursor = "not-allowed";
       }else{
-        
+
         flag = 1;
 
         for(var i = 0; i < j; i++){
@@ -504,12 +532,17 @@ function setJointDirection(){
           if(j % 10 == 0 && j != 10*cnt){
             break;
           }
-          addData(chart, data[j].datetime.substring(0,10), data[j].maxangle, data2[j]);
+          if(jointdirection === "Posture"){
+            //"jointdirectionjointdirection"
+            addData(chart, data[j].datetime.substring(0,10), data[j].sh_angle, data[j].hh_angle);
+          }else{
+            addData(chart, data[j].datetime.substring(0,10), data[j].maxangle, data2[j]);
+          }
         }
 
         cnt++;
       }
-      
+
     });
 
 
@@ -566,7 +599,7 @@ function selectMovie(){
    source_tag.setAttribute("id", "video_source")
    //source_tag.setAttribute("src","../movie/" + selected_movie);
    source_tag.setAttribute("type","video/mp4");
-   
+
    video_tag.appendChild(source_tag);
 
 }
