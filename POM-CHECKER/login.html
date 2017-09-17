@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta http-equiv="Expires" content="Mon, 06 Jan 1990 00:00:01 GMT">
+    <!-- Set no-cache -->
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title> 로그인 </title>
+
+    <!-- Bootstrap -->
+    <link href="../vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="../build/css/custom.min.css" rel="stylesheet">
+    <link href="POM-CHECKER.css" rel="stylesheet">
+  </head>
+
+  <body class="login">
+    <!-- modal content -->
+    <div class="modal fade" id="registerModal" role="dialog">
+      <div class="modal-dialog modal-mid">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">관리자 등록</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-group" id="form-group-name">
+              <label class="control-label" for="inputAdminName">이름</label>
+              <input type="text" class="form-control" id="inputAdminName" placeholder="관리자 이름을 입력하세요.">
+            </div>
+            <div class="form-group" style="margin-top: 20px;">
+              <label class="control-label" for="inputAdminID" id="form-group-number">아이디</label>
+              <input type="text" class="form-control" id="inputAdminID" placeholder="ID를 입력해주세요.">
+            </div>
+            <div class="form-group" style="margin-top: 20px;">
+              <label class="control-label" for="inputAdminPassword" id="form-group-number">비밀번호</label>
+              <input type="password" class="form-control" id="inputAdminPassword" placeholder="비밀번호를 입력해주세요.">
+            </div>
+            <label class="control-label" for="inputAdminGrade" style="margin-top: 5px;">등급</label>
+            <div class="text-center">
+                <input type="radio" name="radio-group" id="test1" value="1">
+                <label for="test1"> 의사 </label>
+                &nbsp&nbsp&nbsp&nbsp
+                <input type="radio" name="radio-group" id="test2" value="2">
+                <label for="test2"> 간호사 </label>
+            </div>
+            <div class="form-group" id="form-group-birth" style="margin-top: 10px;">
+              <label class="control-label" for="inputAdminEmail">E-mail</label>
+              <input type="email" class="form-control" id="inputAdminEmail" placeholder="이메일을 입력해주세요.">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" onclick="registerForAdmin()">회원가입 하기</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="registerIPModal" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">IP & HTTP 등록</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-group" id="form-group-name">
+              <label class="control-label" for="inputLocalIP">IP</label>
+              <input type="text" class="form-control" id="inputLocalIP" placeholder="IP 주소를 입력해주세요.">
+            </div>
+            <div class="form-group" style="margin-top: 20px;">
+              <label class="control-label" for="inputLocalHttp" id="form-group-number">HTTP</label>
+              <input type="text" class="form-control" id="inputLocalHttp" placeholder="Http">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" onclick="registerForIP()">등록하기</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of modal content -->
+    <div class="login_wrapper">
+      <div class="animate form login_form">
+      <!--<h1 class="text-center" style="margin-right: 5px" id="fh5co-logo"><a href="#"><img src="images/logo2.png" alt="Moonlight" width="250px"></a></h1>-->
+        <h1 class="text-center" style="margin-right: 5px" id="fh5co-logo">Team Elysium</h1>
+          <section class="login_content">
+            <form>
+              <h1>로그인</h1>
+              <div>
+                <input id="adminID" type="text" class="form-control" placeholder="아이디" />
+              </div>
+              <div>
+                <input id="adminPassword" type="password" class="form-control" placeholder="비밀번호"  />
+              </div>
+            </form>
+              <div>
+                <div class="row">
+                  <div class="col-sm-12 col-xs-12 col-sm-12">
+                    <button id="login-form" class="btn btn-md btn-primary btn-block" onclick="loginForAdmin()">로그인</button>
+                  </div>
+                </div>
+              <div class="row" style="margin-top: 15px">
+                <div class="col-sm-6 col-xs-6 col-sm-6">
+                  <img src="../image/theme/khu.png"/>
+                </div>
+                <div class="col-sm-6 col-xs-6 col-sm-6">
+                  <img src="../image/theme/logo.png"/>
+                </div>
+              </div>
+
+              <div class="clearfix"></div>
+
+              <div class="separator">
+                <p class="change_link"> 처음 방문하셨습니까?
+                  <b><a href="#signup" class="to_register"  data-toggle="modal" data-target="#registerModal" type="button" class="btn btn-primary"> 회원가입 </a></b>
+                </p>
+
+                <div class="clearfix">
+                  <p id="uiduid"> </p>
+                </div>
+                <br/>
+
+                <div class="row">
+                  <!-- <h1 id="fh5co-logo"><a href="#"><img src="images/logo.png" alt="Team Elysium Logo" width="250px"></a></h1> -->
+                  <p>©2017 <a style="margin-right: 0px" href="http://teamelysium.kr" target="_blank">Team Elysium Inc.</a> All Rights Reserved</p>
+                </div>
+              </div>
+
+          </section>
+        </div>
+      </div>
+      <div class="row">
+        <button id="ipButton" data-toggle="modal" data-target="#registerIPModal" class="btn btn-primary text-center">IP 등록</button>
+      </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="../vendor/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="../vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="login.js"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="../build/js/custom.min.js"></script>
+
+  </body>
+</html>

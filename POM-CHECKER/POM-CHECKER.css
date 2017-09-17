@@ -1,0 +1,163 @@
+/*.scrollbar
+{
+	margin-left: 30px;
+	float: left;
+	height: 300px;
+	width: 65px;
+	background: #F5F5F5;
+	overflow-y: scroll;
+	margin-bottom: 25px;
+}*/
+
+.baseinfo>b
+{
+	color: #73879C;
+}
+
+.crebtn
+{
+	background-color: white;
+	font-family:sans-serif;
+	border-radius: 4px;
+	box-shadow: 0 1px 1px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+}
+
+.btn:focus {
+  background-color: #337ab7;
+}
+
+.panel-default>.panel-background
+{
+	background-color: white;
+	padding: 5px 15px;
+	border-bottom: 1px solid #ccc;
+}
+
+.panel-min
+{
+	min-height: 776px;
+	max-height: 776px;
+}
+
+.style-2::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+.style-2::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #F5F5F5;
+}
+
+.style-2::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: black;
+}
+
+.modal-mid{
+	width: 400px;
+}
+
+.modal-footer{
+	text-align: center;
+}
+
+.modal .control-label{
+	font-size: 15px;
+}
+
+.wating{
+	color: #ccc;
+}
+
+[type="radio"]:checked,
+[type="radio"]:not(:checked) {
+    position: absolute;
+
+}
+
+[type="radio"]:checked + label,
+[type="radio"]:not(:checked) + label
+{
+    position: relative;
+  	padding-left: 28px;
+    cursor: pointer;
+    line-height: 20px;
+    display: inline-block;
+		font-size: 14px;
+}
+
+[type="radio"]:checked + label:before,
+[type="radio"]:not(:checked) + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #ddd;
+    border-radius: 100%;
+    background: #fff;
+}
+
+[type="radio"]:checked + label:after,
+[type="radio"]:not(:checked) + label:after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background: #337ab7;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    border-radius: 100%;
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+[type="radio"]:not(:checked) + label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+
+[type="radio"]:checked + label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+
+.margin-span {
+	white-space: normal;
+}
+
+img {
+	width: 130px;
+	height: 50px;
+}
+
+#ipButton{
+	width: 65px;
+	height: 65px;
+	z-index: 12;
+ 	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+ 	position: fixed;
+ 	bottom: 15px;
+ 	right: 15px;
+ 	border-radius: 50% !important;
+
+}
+
+footer {
+	background-color:white;
+	border: 0.3px solid #ccc;
+	margin: 0.3px;
+}
+
+#footer-info{
+	font-size: 15px;
+}

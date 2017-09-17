@@ -1,0 +1,226 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta http-equiv="Expires" content="Mon, 06 Jan 1990 00:00:01 GMT">
+   <!-- Set no-cache -->
+   <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>POM-CHECKER</title>
+
+    <!-- Bootstrap -->
+    <link href="../vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="../build/css/custom.min.css" rel="stylesheet">
+    <link href="POM-CHECKER.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <div class="container body">
+      <div class="main_container">
+        <!-- top navigation -->
+        <div style="margin-bottom: 15px">
+          <div class="nav" style=" background-color:white; border: 0.3px solid #ccc; margin: 0.3px">
+            <nav>
+              <div class="col-md-8 col-xs-8 col-sm-8">
+              </div>
+              <div class="col-md-4 col-xs-4 col-sm-4 pull-right">
+                 <ul class="nav navbar-nav navbar-right">
+                   <li class="row pull-right">
+                     <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                       <big id="nav-user-name"></big>
+                       <span class=" fa fa-angle-down"></span>
+                     </a>
+                     <ul class="dropdown-menu dropdown pull-right" style="height: 35px; border: #ccc solid 1px">
+                       <li><a id="logoutButton" onclick="logOut()" style="font-size: 15px; margin-top: 5px"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                     </ul>
+                   </li>
+                 </ul>
+                </div>
+            </nav>
+          </div>
+        </div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div class="modal fade" id="registerModal" role="dialog">
+          <div class="modal-dialog modal-mid">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">초진 등록</h4>
+              </div>
+              <div class="modal-body">
+                <div class="form-group" id="form-group-name">
+                  <label class="control-label" for="inputPatientName">이름</label>
+                  <input type="text" class="form-control" id="inputPatientName" placeholder="환자 이름을 입력하세요.">
+                </div>
+                <div class="form-group" style="margin-top: 20px;">
+                  <label class="control-label" for="inputPatientNumber" id="form-group-number">병록번호(식별번호)</label>
+                  <input type="text" class="form-control" id="inputPatientNumber" placeholder="없을 경우 공백으로 남겨두세요.">
+                </div>
+                <label class="control-label" for="inputPatientGender" style="margin-top: 5px;">성별</label>
+                <div class="text-center">
+                    <input type="radio" name="radio-group" id="test1" value="1">
+                    <label for="test1"> 남자 </label>
+                    &nbsp&nbsp&nbsp&nbsp
+                    <input type="radio" name="radio-group" id="test2" value="2">
+                    <label for="test2"> 여자 </label>
+                </div>
+                <div class="form-group" id="form-group-birth" style="margin-top: 10px;">
+                  <label class="control-label" for="inputPatientBirth">생년월일</label>
+                  <input type="text" class="form-control" id="inputPatientBirth" placeholder="ex) 19900101">
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="registerFirstMeasurement()">초진환자 등록 및 검진</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="modal fade" id="checkupModal" role="dialog">
+          <div class="modal-dialog modal-mid">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="Modaltitle">검진등록</h4>
+              </div>
+              <div class="text-center">
+                <h5 id="ModalPatientName"></h5>
+              </div>
+              <div calss="modal-body" id="modal-body" style="padding: 20px;">
+                <label class="control-label" for="inputPatientGender">측정 부위</label>
+                <select class="form-control" id="drop1" aria-haspopup="true" role="button" aria-expanded="true" onchange="registerMeasurement()">
+                  <option value="0" selected>측정부위를 선택해주세요</option>
+                  <option value="10">Shoulder-Flexion</option>
+                  <option value="20">Shoulder-Abduction</option>
+                  <option value="30">Shoulder-Rotation</option>
+                  <option value="40">Elbow-Flexion</option>
+                  <option value="50">Elbow-Pronation</option>
+                  <option value="70">Hip-Flexion</option>
+                  <option value="90">Neck-Rotation</option>
+                  <option value="100">Neck-Flexion</option>
+                  <option value="110">Neck-Abduction</option>
+                  <option value="201">Posture</option>
+                  <option class="wating" value="60" disabled>Knee-Flexion</option>
+                  <option class="wating" value="80" disabled>Hip-Rotation</option>
+                  <option class="wating" value="210" disabled>Hip-Posture</option>
+                </select>
+
+                <div class="form-group" id="modal-direction" style="margin-top: 15px;">
+                   <label class="control-label" for="inputPatientGender">측정 방향</label>
+                   <div class="text-center">
+                       <input type="radio" name="radio-group" id="test3" value="1">
+                       <label for="test3"> Left </label>
+                       &nbsp&nbsp&nbsp&nbsp
+                       <input type="radio" name="radio-group" id="test4" value="2">
+                       <label for="test4"> Right </label>
+                   </div>
+                </div>
+              </div>
+
+              <div class="modal-footer" style="height: 55px">
+                <button type="button" class="btn btn-primary" id="ModalFooter" onclick="startMeasurement()">검진 시작하기</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+        	<div class="col-md-6 text-center">
+        		<div class="panel panel-default">
+        			<div class="panel-heading panel-background">
+        				<ul class="nav nav-pills" style="margin-top: 2px">
+        					<li><input type="text" size="45" class="form-control" id="searchName" placeholder="검색" style="border-radius: 4px"
+        					onkeyup="getSearchName()"></li>
+        					<li class="pull-right">
+                    <button data-toggle="modal" data-target="#checkupModal" type="button" class="btn btn-primary"
+                  onclick="registerMeasurement(this.id)">검진 등록
+                    </button>
+                  </li>
+        					<li class="pull-right">
+                    <button type="button" data-toggle="modal" data-target="#registerModal" class="btn btn-primary">
+                      초진
+                    </button>
+                  </li>
+        				</ul>
+        			</div>
+		  			<div class="panel-body panel-min style-2 text-left" id="patientlist" style="overflow-y: scroll;">
+		    		</div>
+		  		</div>
+        	</div>
+        	<div class="col-md-3 col-xs-6 col-sm-6 text-center">
+        		<div class="panel panel-default">
+        			<div class="panel-heading panel-background">
+        				<ul class="nav nav-pills" style="margin-top: 2px;">
+        					<li class="pull-left"><h4 style="color:#73879C">History</h4></li>
+                  <li class="pull-right">
+                  <button class="btn btn-primary" id="CheckGraph" onclick="checkGraph()">그래프 확인</button>
+                  </li>
+        				</ul>
+        			</div>
+		  			<div class="panel-body panel-min style-2 nav-pills" id="cdatelist" style="overflow-y: scroll;">
+		    		</div>
+		  		</div>
+        	</div>
+        <div class="col-md-3 col-xs-6 col-sm-6 text-center">
+        <!-- page content -->
+          <h4 class="text-left">측정 전 환자</h4>
+        	 <div class="panel panel-default">
+		  		    <div class="panel-body style-2" id="BeforeMeasurement" style="max-height: 300px; height: 300px; overflow-y: scroll;">
+		    		  </div>
+		    	 </div>
+        <!-- page content -->
+            <div class="row">
+                <div class="col-md-3">
+                    <h4 class="text-left">측정 중</h4>
+                </div>
+            </div>
+
+		      <div class="panel panel-default">
+            <div class="panel-body style-2" id="Measuring">
+            </div>
+          </div>
+        <!-- /page content -->
+		      <h4 class="text-left">측정 후 환자</h4>
+		    	<div class="panel panel-default">
+		    		<div class="panel-body style-2" id="AfterMeasurement" style="max-height: 300px; height: 300px; overflow-y: scroll;">
+		    		</div>
+		    	</div>
+          <div>
+		  	</div>
+        <button type=button class="btn btn-primary pull-right" id="DeletePatientAfterMeasurement" onclick="deletePatientAfterMeasurement()" style="width: 100px; margin-bottom: 10px">검진 완료</button>
+      </div>
+     </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+          <div class="text-center">
+            <p id="footer-info">&copy; 2017 <a href="http://teamelysium.kr" target="_blank"><b>Team Elysium Inc.</b></a>
+               All Rights Reserved.
+            </p>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      </div>
+    </div>
+
+
+    <!-- jQuery -->
+    <script src="../vendor/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="../vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="POM-CHECKER.js"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="../build/js/custom.min.js"></script>
+  </body>
+</html>
