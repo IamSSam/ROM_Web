@@ -68,7 +68,7 @@
                             </div>
                           </div>
 
-                          <div class="col-md-5 col-sm-5 col-xs-5" id="select_container">
+                          <div class="col-md-4 col-sm-4 col-xs-4" id="select_container">
                             <p style="font-size: 12px"><strong>환자와 측정 부위를 선택해주세요.</strong></p>
                             <ul class="nav nav-pills" role="tablist">
                               <li role="presentation" class="dropdown" id="drop1-wrapper">
@@ -84,9 +84,11 @@
                               </li>
                             </ul>
                           </div>
-                          <div class="col-md-1 col-sm-1 col-xs-1 hidden-print" id="print_container">
+                          <div class="col-md-2 col-sm-2 col-xs-2 hidden-print" id="print_container">
                             <div class="bs-example-popovers center">
-                              <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="left" title="Go printing!" onclick="romPrint()">Print</button>
+                              <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Send Message!" onclick="romPrint()">Capture</button>
+                              <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Go printing!" onclick="romPrint()">Print</button>
+
                             </div>
                           </div>
                         </div>
@@ -199,7 +201,7 @@
                     <div class="col-md-7">
                       <div id="video_container">
                        <video id="video_tag" width="100%" controls>
-                         <source id="source_tag" type="video/ogg" src=""/>
+                         <source id="source_tag" type="video/mp4" src=""/>
                        </video>
                      </div>
                     </div>

@@ -3,7 +3,7 @@
   <head>
   <meta http-equiv="Expires" content="Mon, 06 Jan 1990 00:00:01 GMT">
    <!-- Set no-cache -->
-   <meta http-equiv="Cache-Control" content="no-cache">
+   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
@@ -171,11 +171,19 @@
         	</div>
         <div class="col-md-3 col-xs-6 col-sm-6 text-center">
         <!-- page content -->
-          <h4 class="text-left">측정 전 환자</h4>
+          <div class="row">
+                <div class="col-md-3">
+                    <h4 class="text-left">측정 전 환자</h4>
+                </div>
+                <div class="col-md-9">
+                    <button class="btn btn-primary pull-right" id="" onclick="viewMeasuringSwap()">측정하기</button>
+                </div>
+            </div>          
         	 <div class="panel panel-default">
-		  		    <div class="panel-body style-2" id="BeforeMeasurement" style="max-height: 300px; height: 300px; overflow-y: scroll;">
+		  		    <div class="panel-body style-2 dragColumns" id="BeforeMeasurement" style="max-height: 300px; height: 300px; overflow-y: scroll;">
 		    		  </div>
 		    	 </div>
+        
         <!-- page content -->
             <div class="row">
                 <div class="col-md-3">
@@ -219,6 +227,7 @@
     <!-- Bootstrap -->
     <script src="../vendor/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="POM-CHECKER.js"></script>
+    <script src="drag.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>

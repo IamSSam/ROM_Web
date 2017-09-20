@@ -2,12 +2,14 @@
 var selectedId;
 var i = 1;
 var ip;
+var setViewList;
 
 window.onload = function () {
   ip = localStorage.getItem("IP");
 
+  $(".dragColumns").sortable();
   getPatientName();
-  setInterval(viewBeforeMeasurementList, 1000);
+  setViewList = setInterval(viewBeforeMeasurementList, 1000);
   var uid = localStorage.getItem("uid");
   if(uid === 'undefined' || uid === null){
     location.href = "./login.html";
@@ -22,6 +24,37 @@ window.onload = function () {
   });
 
 };
+
+function setViewListPause(){
+  //onDragStart
+  window.clearInterval(setViewList);
+}
+
+function setViewListPlay(kinectid, changeForcecodePrev, changeForcecodeNext, index, forcecode){
+ //onDrop
+ var forcecodeAdd = (changeForcecodeNext - changeForcecodePrev)/2;
+ forcecode = parseInt(changeForcecodePrev) + parseInt(forcecodeAdd);
+ console.log(changeForcecodePrev+","+changeForcecodeNext);
+ console.log(forcecodeAdd+","+forcecode);
+ 
+ if(index!=-1){
+  var data = {kinectid : kinectid, forcecode : forcecode};
+  $.ajax({
+      url: "http://" + ip + "/php/rom_server_php/beforePatientUpdate.php",
+      type: 'POST',
+      data: data,
+      dataType: 'html',
+      success: function(data){
+          setViewList = setInterval(viewBeforeMeasurementList, 1000);
+        },
+      error: function(request, status, error){
+        console.log(request, status, error);
+      },
+    });
+ 
+ }
+  
+}
 
 function getPatientName(){
     viewBeforeMeasurementList();
@@ -253,7 +286,7 @@ function startMeasurement(){
         }
     }
 
-    var data = {patientid : selectedId, jointdirection : selected_jointdirection, forcecode : 0};
+    var data = {patientid : selectedId, jointdirection : selected_jointdirection};
 
     $.ajax({
       url: "http://" + ip + "/php/rom_server_php/fronttokinect.php",
@@ -281,6 +314,21 @@ function viewBeforeMeasurementList()
     dataType: 'json',
     success: function(data){
       $("#BeforeMeasurement").empty();
+/*
+      var emptyDiv;
+      if(data){
+        emptyDiv = document.createElement("div");
+        emptyDiv.style["border"] = "3px solid #ff3f3f";
+        emptyDiv.style["border-radius"] = "5px";
+        emptyDiv.style["margin-top"] = "3px";
+        emptyDiv.style["margin-bottom"] = "3px";
+        emptyDiv.style['padding'] = "5px";
+        emptyDiv.style["z-index"] = "0";
+        emptyDiv.style["position"] = "absolute";
+        emptyDiv.style["width"] = "417px";
+        emptyDiv.style["height"] = "52px";
+        document.getElementById("BeforeMeasurement").appendChild(emptyDiv);
+      }*/
 
       for(var i = 1; i < data.length; i++){
         //console.log("Patient List DATA : "+data[i]);
@@ -288,8 +336,14 @@ function viewBeforeMeasurementList()
         var name = data[i].name;
         var jointdirection = data[i].jointdirection;
         jointdirection = setNamingforJointdirection(jointdirection);
+        
+        var kinectid = data[i].kinectid;
+        var forcecode = data[i].forcecode;
         var new_kinectscList = document.createElement("div");
         new_kinectscList.setAttribute("id",patientid);
+        new_kinectscList.setAttribute("class", "dragColumn");
+        new_kinectscList.setAttribute("data-kinectid", kinectid);
+        new_kinectscList.setAttribute("data-forcecode", forcecode);
         new_kinectscList.style["border"] = "1px solid #ccc";
         new_kinectscList.style["border-radius"] = "5px";
         new_kinectscList.style["margin-top"] = "3px";
@@ -297,6 +351,10 @@ function viewBeforeMeasurementList()
         new_kinectscList.style['padding'] = "5px";
         var row_div = document.createElement("div");
         row_div.setAttribute("class", "row");
+
+        if(i==1){
+          new_kinectscList.style["border"] = "3px solid #ff3f3f";
+        }
 
         var patient_id = document.createElement("div");
         patient_id.setAttribute("class", "col-md-12 col-sm-6 col-xs-6 baseinfo");
@@ -312,6 +370,7 @@ function viewBeforeMeasurementList()
         new_kinectscList.appendChild(row_div);
 
         new_kinectscList.style.textAlign = "left";
+
         document.getElementById("BeforeMeasurement").appendChild(new_kinectscList);
       }
     },
@@ -326,7 +385,7 @@ function viewBeforeMeasurementList()
 // 측정 중
 function viewMeasuring()
 {
-  $.ajax({
+  return $.ajax({
     url: "http://" + ip + "/php/rom_server_php/kinectsclist.php",
     type: 'GET',
     dataType: 'json',
@@ -337,9 +396,12 @@ function viewMeasuring()
       var patientid = data[0].patientid;
       var name = data[0].name;
       var jointdirection = data[0].jointdirection;
+      var forcecode = data[0].forcecode;
       jointdirection = setNamingforJointdirection(jointdirection);
       var new_kinectscList = document.createElement("div");
-      new_kinectscList.setAttribute("id",patientid);
+      new_kinectscList.setAttribute("id",patientid);      
+      new_kinectscList.setAttribute("data-forcecode", forcecode);
+      new_kinectscList.setAttribute("class","measurePatient")
       new_kinectscList.style["border"] = "1px solid #ccc";
       new_kinectscList.style["border-radius"] = "5px";
       new_kinectscList.style["margin-top"] = "3px";
@@ -363,11 +425,40 @@ function viewMeasuring()
 
       new_kinectscList.style.textAlign = "left";
       document.getElementById("Measuring").appendChild(new_kinectscList);
+
     },
     error: function(request, status, error){
       console.log(request, status, error);
     },
   });
+
+
+}
+
+function viewMeasuringSwap()
+{
+    var data = viewMeasuring();
+    data.success(function (data){
+      var swapData = {kinectid : data[0].kinectid, forcecode : data[0].forcecode, nextKinectid : data[1].kinectid, nextForcecode : data[1].forcecode};
+      $.ajax({
+        url: "http://" + ip + "/php/rom_server_php/measurePatientUpdate.php",
+        type: 'POST',
+        data: swapData,
+        dataType: 'html',
+        success: function(data){
+          console.log("success!");
+        },
+        error: function(request, status, error){
+          console.log(request, status, error);
+        },
+      });
+    });
+      
+       
+}
+
+function measurePatientUpdate(){
+
 }
 
 function checkGraph() {

@@ -499,7 +499,7 @@ function setJointDirection(){
 }
 
 function getMovie(movie){
-  var movie_name = movie + ".webm";
+  var movie_name = movie + ".mp4";
   var movie_container = document.getElementById('drop3');
   var new_movie = document.createElement("option");
   new_movie.innerHTML = movie_name;
@@ -518,7 +518,7 @@ function selectMovie(){
     var select_movie = document.getElementById('drop3');
     var selected_movie = select_movie.options[select_movie.selectedIndex].value;
     source_tag.setAttribute("id", "source_tag");
-    source_tag.setAttribute("type", "video/webm");
+    source_tag.setAttribute("type", "video/mp4");
     source_tag.setAttribute("src","../movie/" + selected_movie);
 
     video_tag.appendChild(source_tag);
@@ -540,13 +540,7 @@ function romPrint(){
   window.print();
 }
 
-function getMainPage()
-{
-
-}
-
 function goMainPage() {
-    getMainPage();
     location.href = "../POM-CHECKER/POM-CHECKER.html";
 }
 

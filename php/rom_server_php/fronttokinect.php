@@ -13,12 +13,17 @@ header('Access-Control-Allow-Methods: GET, POST, PUT');
 include '../include/Config.php';
 
 //front -> kinect
-if(isset($_POST['patientid']) && isset($_POST['jointdirection']) && isset($_POST['forcecode']))
+if(isset($_POST['patientid']) && isset($_POST['jointdirection']))
 {
 	$patientid=$_POST['patientid'];
 	$jointdirection=$_POST['jointdirection'];
-	$forcecode=$_POST['forcecode'];
+	
 	$connection = mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD,DB_DATABASE);
+
+	$result_set = mysqli_query($connection,"SELECT MAX(forcecode) FROM `rom_kinectsc`");
+	mysqli_data_seek($result_set, 0);
+	$row = mysqli_fetch_row($result_set);
+	$forcecode= $row[0]+1000;
 
 	$result = mysqli_query($connection,"INSERT INTO rom_kinectsc(patientid,datetime,jointdirection,forcecode)
 		values('".$patientid."' , now() ,'".$jointdirection."','".$forcecode."')");
